@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
   impressionist :actions=>[:show]
-  
+
   def show
     @book = Book.find(params[:id])
     @user = @book.user
@@ -10,7 +10,7 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.all.sort { |a, b| b.favorite_users.count <=> a.favorite_users.count }
+    @books = Book.all.order(params[:sort])
     @book = Book.new
   end
 
